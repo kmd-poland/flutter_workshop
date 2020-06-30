@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterworkshops/blocs/choose_location_bloc.dart';
 import 'package:flutterworkshops/screens/weather_page.dart';
 
 class ChooseLocationPage extends StatefulWidget {
@@ -11,18 +13,13 @@ class ChooseLocationPage extends StatefulWidget {
 }
 
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
-  List<String> _locations;
+  ChooseLocationBloc _bloc;
 
   @override
   void initState() {
     super.initState();
 
-    _locations = [
-      "Hellsinki Wielkie",
-      "Hellsinki Małe",
-      "Hellsinki Dolne",
-      "Hellsinki Górne"
-    ];
+    _bloc = ChooseLocationBloc();
   }
 
   @override
@@ -31,19 +28,36 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Column(children: <Widget>[
-          TextField(onChanged: (text) {
-            //TODO call WeatherService and update state
-          },),
-          Expanded(child: ListView.builder(
-              itemCount: _locations.length,
-              itemBuilder: (context, index) {
-            var item = _locations[index];
-            return ListTile(title: Text(item), onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => WeatherPage(item)));
-            },);
-          }),)
-        ],)
-    );
+        body: Column(
+          children: <Widget>[
+            TextField(
+              onChanged: (text) {
+                _bloc.add(LocationSearchEvent(text));
+              },
+            ),
+            BlocBuilder(
+              bloc: _bloc,
+              builder: (context, state) {
+                if (state is ChooseLocationListLoadedState) {
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: state.locations.length,
+                        itemBuilder: (context, index) {
+                          var item = state.locations[index];
+                          return ListTile(
+                            title: Text(item.title),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => WeatherPage(item.title)));
+                            },
+                          );
+                        }),
+                  );
+                } else
+                  return Container();
+              },
+            ),
+          ],
+        ));
   }
 }
