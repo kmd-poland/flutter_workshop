@@ -31,7 +31,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container()
+      body: Center(child: Text("IT'S ALIVE!!!", style: Theme.of(context).textTheme.headline3,))
     );
   }
 }
