@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterworkshops/screens/weather_page.dart';
+import 'package:flutterworkshops/services/weather_service.dart';
 
 class ChooseLocationPage extends StatefulWidget {
   ChooseLocationPage({Key key, this.title}) : super(key: key);
@@ -31,19 +32,30 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Column(children: <Widget>[
-          TextField(onChanged: (text) {
-            //TODO call WeatherService and update state
-          },),
-          Expanded(child: ListView.builder(
-              itemCount: _locations.length,
-              itemBuilder: (context, index) {
-            var item = _locations[index];
-            return ListTile(title: Text(item), onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => WeatherPage(item)));
-            },);
-          }),)
-        ],)
-    );
+        body: Column(
+          children: <Widget>[
+            TextField(
+              onChanged: (text) {
+                setState(() {
+                  _locations = WeatherService.get().getLocation(text);
+                });
+              },
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: _locations.length,
+                  itemBuilder: (context, index) {
+                    var item = _locations[index];
+                    return ListTile(
+                      title: Text(item),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => WeatherPage(item)));
+                      },
+                    );
+                  }),
+            )
+          ],
+        ));
   }
 }

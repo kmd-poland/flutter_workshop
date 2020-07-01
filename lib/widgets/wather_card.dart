@@ -54,7 +54,7 @@ class WeatherCard extends StatelessWidget {
             children: <Widget>[
               WeatherIcon(details),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Text(
                 "${details.temperature.floor()}℃",
