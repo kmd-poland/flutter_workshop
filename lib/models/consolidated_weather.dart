@@ -7,6 +7,9 @@ class ConsolidatedWeather {
   @JsonKey(name: "weather_state_name")
   final String weatherStateName;
 
+  @JsonKey(name: "weather_state_abbr")
+  final String weatherStateAbbr;
+
   @JsonKey(name: "min_temp")
   final double minTemp;
 
@@ -19,14 +22,17 @@ class ConsolidatedWeather {
   @JsonKey(name: "wind_speed")
   final double windSpeed;
 
+  @JsonKey(name: "wind_direction")
+  final double windDirection;
+
   @JsonKey(name: "air_pressure")
   final String airPressure;
 
   @JsonKey(name: "humidity")
   final String humidity;
 
-  ConsolidatedWeather(this.weatherStateName, this.minTemp, this.maxTemp,
-      this.theTemp, this.windSpeed, this.airPressure, this.humidity);
+  ConsolidatedWeather(this.weatherStateName, this.weatherStateAbbr, this.minTemp, this.maxTemp,
+      this.theTemp, this.windSpeed, this.windDirection, this.airPressure, this.humidity);
 
   factory ConsolidatedWeather.fromJson(Map<String, dynamic> json) => _$ConsolidatedWeatherFromJson(json);
   Map<String, dynamic> toJson() => _$ConsolidatedWeatherToJson(this);
