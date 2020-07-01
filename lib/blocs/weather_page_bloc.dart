@@ -6,16 +6,30 @@ import 'package:rxdart/rxdart.dart';
 abstract class WeatherPageEvent {}
 abstract class WeatherPageState {}
 
+class InitWeatherEvent extends WeatherPageEvent {
+  final int locationId;
+
+  InitWeatherEvent(this.locationId);
+}
+
+class LoadingWeatherDataState extends WeatherPageState {}
+
+class WeatherDataLoadedState extends WeatherPageState {
+  final WeatherDetails weatherDetails;
+
+  WeatherDataLoadedState(this.weatherDetails);
+}
+
 
 class WeatherPageBloc extends Bloc<WeatherPageEvent, WeatherPageState> {
   @override
-  // TODO: implement initialState
-  WeatherPageState get initialState => throw UnimplementedError();
+  WeatherPageState get initialState => LoadingWeatherDataState();
 
   @override
-  Stream<WeatherPageState> mapEventToState(WeatherPageEvent event) {
-    // TODO: implement mapEventToState
-    throw UnimplementedError();
+  Stream<WeatherPageState> mapEventToState(WeatherPageEvent event) async* {
+    if(event is InitWeatherEvent) {
+      var details = await WeatherService.get().getWeather(event.locationId);
+      yield WeatherDataLoadedState(details);
+    }
   }
-
 }

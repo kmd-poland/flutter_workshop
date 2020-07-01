@@ -64,7 +64,7 @@ class WeatherCard extends StatelessWidget {
                     .apply(color: Colors.white),
               ),
               Text(
-                "${details.type.toString().replaceFirst("WeatherType.", "")}",
+                "${details.weatherState}",
                 style: Theme.of(context)
                     .textTheme
                     .headline6

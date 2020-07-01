@@ -49,7 +49,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                             title: Text(item.title),
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => WeatherPage(item.title)));
+                                  builder: (context) => WeatherPage(item)));
                             },
                           );
                         }),

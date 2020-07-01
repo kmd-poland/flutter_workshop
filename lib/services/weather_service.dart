@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flutterworkshops/models/location.dart';
+import 'package:flutterworkshops/models/weather_prediction.dart';
 
 class WeatherService {
   static final WeatherService _instance = WeatherService._internal();
@@ -18,31 +16,20 @@ class WeatherService {
   }
 
   Future<List<Location>> getLocation(String locationName) async {
-    var result = await _dio.get(("/api/location/search"), queryParameters: {"query": locationName});
+    var result = await _dio.get(("/api/location/search"),
+        queryParameters: {"query": locationName});
 
-   return (result.data as List)
+    return (result.data as List)
         .map((data) => Location.fromJson(data))
         .toList();
   }
 
-  //TODO change it to use API and return WeatherPrediction
-  WeatherDetails getWeather(String locationName) {
-    Random rand = Random();
-    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)]);
-  }
-}
+  Future<WeatherDetails> getWeather(int locationId) async {
+    var result = await _dio.get(("/api/location/$locationId"));
+    var weatherPrediction = WeatherPrediction.fromJson(result.data);
 
-enum WeatherType {
-  Snow,
-  Sleet,
-  Hail,
-  Thunderstorm,
-  HeavyRain,
-  LightRain,
-  Showers,
-  HeavyCloud,
-  LightCloud,
-  Clear
+    return WeatherDetails.fromPrediction(weatherPrediction);
+  }
 }
 
 class WeatherDetails {
@@ -51,11 +38,27 @@ class WeatherDetails {
   final double windSpeed;
   final String windDirection;
   final double humidity;
+  final String weatherState;
+  final String weatherIconUrl;
 
-  final WeatherType type;
+  WeatherDetails(
+      this.temperature,
+      this.pressure,
+      this.windSpeed,
+      this.windDirection,
+      this.humidity,
+      this.weatherState,
+      this.weatherIconUrl);
 
-  WeatherDetails(this.temperature, this.pressure, this.windSpeed,
-      this.windDirection, this.humidity, this.type);
+  factory WeatherDetails.fromPrediction(WeatherPrediction prediction) {
+    var todaysWeather = prediction.weatherPrediction.first;
+    return WeatherDetails(
+        todaysWeather.theTemp,
+        todaysWeather.airPressure,
+        todaysWeather.windSpeed,
+        todaysWeather.windDirectionCompass,
+        todaysWeather.humidity,
+        todaysWeather.weatherStateName,
+        "https://www.metaweather.com/static/img/weather/png/${todaysWeather.weatherStateAbbr}.png");
+  }
 }
-
-
