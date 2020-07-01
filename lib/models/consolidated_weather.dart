@@ -29,10 +29,10 @@ class ConsolidatedWeather {
   final String windDirectionCompass;
 
   @JsonKey(name: "air_pressure")
-  final String airPressure;
+  final double airPressure;
 
   @JsonKey(name: "humidity")
-  final String humidity;
+  final double humidity;
 
   ConsolidatedWeather(this.weatherStateName, this.weatherStateAbbr, this.minTemp, this.maxTemp,
       this.theTemp, this.windSpeed, this.windDirection, this.windDirectionCompass, this.airPressure, this.humidity);
