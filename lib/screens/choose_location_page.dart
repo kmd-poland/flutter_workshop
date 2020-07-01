@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterworkshops/blocs/choose_location_bloc.dart';
 import 'package:flutterworkshops/screens/weather_page.dart';
+import 'package:flutterworkshops/services/weather_service.dart';
 
 class ChooseLocationPage extends StatefulWidget {
   ChooseLocationPage({Key key, this.title}) : super(key: key);
