@@ -77,7 +77,7 @@ class WeatherCard extends StatelessWidget {
               SizedBox(height: 5),
               WeatherRow("Wind speed", "${details.windSpeed.floor()} km/h"),
               SizedBox(height: 5),
-              WeatherRow("Wind direction", "${details.windDirection.floor()}"),
+              WeatherRow("Wind direction", "${details.windDirection}"),
             ],
           ),
         )
