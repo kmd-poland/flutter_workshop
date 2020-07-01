@@ -71,7 +71,7 @@ class WeatherCard extends StatelessWidget {
                     .apply(color: Colors.white),
               ),
               Spacer(),
-              WeatherRow("Pressure", "${details.pressure.toStringAsFixed(2)}"),
+              WeatherRow("Pressure", "${details.pressure.toStringAsFixed(2)} mbar"),
               SizedBox(height: 5),
               WeatherRow("Humidity", "${details.humidity.floor()}%"),
               SizedBox(height: 5),
