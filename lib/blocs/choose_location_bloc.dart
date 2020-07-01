@@ -22,13 +22,12 @@ class ChooseLocationBloc extends Bloc<ChooseLocationEvent, ChooseLocationState> 
   @override
   ChooseLocationState get initialState => ChooseLocationListLoadedState([]);
 
-  //TODO uncomment and check what changes
-//  @override
-//  Stream<Transition<ChooseLocationEvent, ChooseLocationState>> transformEvents(Stream<ChooseLocationEvent> events, transitionFn) {
-//    return events
-//        .debounceTime(const Duration(milliseconds: 300))
-//        .switchMap(transitionFn);
-//  }
+  @override
+  Stream<Transition<ChooseLocationEvent, ChooseLocationState>> transformEvents(Stream<ChooseLocationEvent> events, transitionFn) {
+    return events
+        .debounceTime(const Duration(milliseconds: 300))
+        .switchMap(transitionFn);
+  }
 
   @override
   Stream<ChooseLocationState> mapEventToState(ChooseLocationEvent event) async* {
