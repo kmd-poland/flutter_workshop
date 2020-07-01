@@ -20,7 +20,7 @@ class _WeatherPageState extends State<WeatherPage> {
           title: Text("Weather in ${widget.cityName}"),
         ),
         //TODO extend with more weather info
-        body: Center(child: WeatherIcon(WeatherService.get().getWeather(widget.cityName).Type))
+        body: Center(child: WeatherIcon(WeatherService.get().getWeather(widget.cityName).type))
     );
   }
 }
@@ -37,13 +37,20 @@ class WeatherIcon extends StatelessWidget {
 
   String _getUnicode() {
     switch(type) {
-      case WeatherType.Cloudy:
+      case WeatherType.HeavyCloud:
+      case WeatherType.LightCloud:
         return "⛅";
-      case WeatherType.Rainy:
+      case WeatherType.Snow:
+      case WeatherType.Sleet:
+      case WeatherType.Hail:
+        return "🌨";
+      case WeatherType.Thunderstorm:
+      case WeatherType.Showers:
+        return "🌩";
+      case WeatherType.HeavyRain:
+      case WeatherType.LightRain:
         return "🌧";
-      case WeatherType.Foggy:
-        return "🌫";
-      case WeatherType.Sunny:
+      case WeatherType.Clear:
         return "🌤";
     }
   }

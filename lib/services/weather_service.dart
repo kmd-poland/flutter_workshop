@@ -21,26 +21,34 @@ class WeatherService {
 
   WeatherDetails getWeather(String locationName) {
     Random rand = Random();
-    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 360, WeatherType.values[rand.nextInt(WeatherType.values.length)]);
+    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 360, rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)]);
   }
 }
 
 enum WeatherType {
-  Cloudy,
-  Rainy,
-  Foggy,
-  Sunny,
+  Snow,
+  Sleet,
+  Hail,
+  Thunderstorm,
+  HeavyRain,
+  LightRain,
+  Showers,
+  HeavyCloud,
+  LightCloud,
+  Clear
 }
 
 class WeatherDetails {
-  final double Temperature;
-  final double Preassure;
-  final double WindSpeed;
-  final double WindDirection;
-  final WeatherType Type;
+  final double temperature;
+  final double pressure;
+  final double windSpeed;
+  final double windDirection;
+  final double humidity;
 
-  WeatherDetails(this.Temperature, this.Preassure, this.WindSpeed,
-      this.WindDirection, this.Type);
+  final WeatherType type;
+
+  WeatherDetails(this.temperature, this.pressure, this.windSpeed,
+      this.windDirection, this.humidity, this.type);
 }
 
 
