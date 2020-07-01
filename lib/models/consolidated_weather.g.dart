@@ -16,8 +16,8 @@ ConsolidatedWeather _$ConsolidatedWeatherFromJson(Map<String, dynamic> json) {
     (json['wind_speed'] as num)?.toDouble(),
     (json['wind_direction'] as num)?.toDouble(),
     json['wind_direction_compass'] as String,
-    json['air_pressure'] as String,
-    json['humidity'] as String,
+    (json['air_pressure'] as num)?.toDouble(),
+    (json['humidity'] as num)?.toDouble(),
   );
 }
 
