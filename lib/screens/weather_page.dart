@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterworkshops/services/weather_service.dart';
+import 'package:flutterworkshops/widgets/wather_card.dart';
 import 'package:flutterworkshops/widgets/wather_icon.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -16,12 +17,16 @@ class WeatherPage extends StatefulWidget {
 class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Weather in ${widget.cityName}"),
+    return Stack(children: <Widget>[
+      Positioned.fill(child: WeatherCard(WeatherService.get().getWeather(widget.cityName))),
+      Container(
+        height: 80,
+        child: AppBar(
+          elevation: 0,
+          title: Text(widget.cityName),
+          backgroundColor: Colors.transparent,
         ),
-        //TODO extend with more weather info
-        body: Center(child: WeatherIcon(WeatherService.get().getWeather(widget.cityName)))
-    );
+      ),
+    ]);
   }
 }
