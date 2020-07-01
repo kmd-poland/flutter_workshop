@@ -21,7 +21,7 @@ class WeatherService {
 
   WeatherDetails getWeather(String locationName) {
     Random rand = Random();
-    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 360, rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)]);
+    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)]);
   }
 }
 
@@ -42,7 +42,7 @@ class WeatherDetails {
   final double temperature;
   final double pressure;
   final double windSpeed;
-  final double windDirection;
+  final String windDirection;
   final double humidity;
 
   final WeatherType type;
