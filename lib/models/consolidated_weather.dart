@@ -25,6 +25,9 @@ class ConsolidatedWeather {
   @JsonKey(name: "wind_direction")
   final double windDirection;
 
+  @JsonKey(name: "wind_direction_compass")
+  final String windDirectionCompass;
+
   @JsonKey(name: "air_pressure")
   final String airPressure;
 
@@ -32,7 +35,7 @@ class ConsolidatedWeather {
   final String humidity;
 
   ConsolidatedWeather(this.weatherStateName, this.weatherStateAbbr, this.minTemp, this.maxTemp,
-      this.theTemp, this.windSpeed, this.windDirection, this.airPressure, this.humidity);
+      this.theTemp, this.windSpeed, this.windDirection, this.windDirectionCompass, this.airPressure, this.humidity);
 
   factory ConsolidatedWeather.fromJson(Map<String, dynamic> json) => _$ConsolidatedWeatherFromJson(json);
   Map<String, dynamic> toJson() => _$ConsolidatedWeatherToJson(this);

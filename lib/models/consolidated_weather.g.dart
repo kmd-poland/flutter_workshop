@@ -15,6 +15,7 @@ ConsolidatedWeather _$ConsolidatedWeatherFromJson(Map<String, dynamic> json) {
     (json['the_temp'] as num)?.toDouble(),
     (json['wind_speed'] as num)?.toDouble(),
     (json['wind_direction'] as num)?.toDouble(),
+    json['wind_direction_compass'] as String,
     json['air_pressure'] as String,
     json['humidity'] as String,
   );
@@ -30,6 +31,7 @@ Map<String, dynamic> _$ConsolidatedWeatherToJson(
       'the_temp': instance.theTemp,
       'wind_speed': instance.windSpeed,
       'wind_direction': instance.windDirection,
+      'wind_direction_compass': instance.windDirectionCompass,
       'air_pressure': instance.airPressure,
       'humidity': instance.humidity,
     };
