@@ -37,7 +37,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 return Positioned.fill(child: WeatherCard(state.weatherDetails));
               }
               else
-                return Center(child: CircularProgressIndicator());
+                return Positioned.fill(child: Container(color: Colors.white, child: Center(child: CircularProgressIndicator())));
             },
           ),
           Container(
