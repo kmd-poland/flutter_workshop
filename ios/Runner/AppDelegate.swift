@@ -11,9 +11,8 @@ import Flutter
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         compassService = CompassService(onReading: onCompassReading)
-        compassService.startReadings()
         
-        
+        //todo: listen to flutter for start/stop compass events
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
