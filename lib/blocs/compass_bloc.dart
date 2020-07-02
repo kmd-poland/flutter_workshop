@@ -27,7 +27,7 @@ class CompassBloc extends Bloc<CompassEvent, CompassState> {
   @override
   CompassState get initialState => NoCompassDataState();
 
-  WeatherPageBloc(){
+  CompassBloc(){
     //TODO: you should register a handler for native events here and push CompassReading event here
   }
 
