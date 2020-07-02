@@ -8,9 +8,11 @@ abstract class ChooseLocationState {}
 
 class ChooseLocationListLoadedState extends ChooseLocationState{
   final List<Location> locations;
-
   ChooseLocationListLoadedState(this.locations);
 }
+
+class ChooseLocationErrorState extends ChooseLocationState{}
+
 
 class LocationSearchEvent extends ChooseLocationEvent {
   final String text;
@@ -32,8 +34,17 @@ class ChooseLocationBloc extends Bloc<ChooseLocationEvent, ChooseLocationState> 
   @override
   Stream<ChooseLocationState> mapEventToState(ChooseLocationEvent event) async* {
     if(event is LocationSearchEvent) {
-      var locations = await WeatherService.get().getLocation(event.text);
-      yield ChooseLocationListLoadedState(locations);
+      if (event.text.length < 2){
+        yield ChooseLocationListLoadedState([]);
+        return;
+      }
+
+      try {
+        var locations = await WeatherService.get().getLocation(event.text);
+        yield ChooseLocationListLoadedState(locations);
+      } catch (e){
+        yield ChooseLocationErrorState();
+      }
     }
   }
 }

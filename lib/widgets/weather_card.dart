@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterworkshops/services/weather_service.dart';
-import 'package:flutterworkshops/widgets/wather_icon.dart';
+import 'package:flutterworkshops/widgets/weather_icon.dart';
 import 'package:flutterworkshops/widgets/weather_row.dart';
 
 class RoundedDiagonalPathClipper extends CustomClipper<Path> {
@@ -71,7 +71,7 @@ class WeatherCard extends StatelessWidget {
                     .apply(color: Colors.white),
               ),
               Spacer(),
-              WeatherRow("Pressure", "${details.pressure.toStringAsFixed(2)} mbar"),
+              WeatherRow("Pressure", "${details.pressure.toStringAsFixed(2)} hPa"),
               SizedBox(height: 5),
               WeatherRow("Humidity", "${details.humidity.floor()}%"),
               SizedBox(height: 5),

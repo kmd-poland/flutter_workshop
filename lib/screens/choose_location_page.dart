@@ -32,6 +32,11 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
         body: Column(
           children: <Widget>[
             TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                labelText: "Enter location",
+                contentPadding: EdgeInsets.all(10)
+              ),
               onChanged: (text) {
                 _bloc.add(LocationSearchEvent(text));
               },
@@ -40,25 +45,36 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
               bloc: _bloc,
               builder: (context, state) {
                 if (state is ChooseLocationListLoadedState) {
-                  return Expanded(
-                    child: ListView.builder(
-                        itemCount: state.locations.length,
-                        itemBuilder: (context, index) {
-                          var item = state.locations[index];
-                          return ListTile(
-                            title: Text(item.title),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => WeatherPage(item)));
-                            },
-                          );
-                        }),
-                  );
-                } else
+                  return _buildResultList(state);
+                } else if (state is ChooseLocationErrorState){
+                  return _buildError();
+                }
                   return Container();
               },
             ),
           ],
         ));
+  }
+
+  Widget _buildError(){
+    return Expanded(
+      child: Center(child: Text("We couldn't fetch your desired location. Please check your network connection ")),
+    );
+  }
+  Widget _buildResultList(ChooseLocationListLoadedState state) {
+     return Expanded(
+      child: ListView.builder(
+          itemCount: state.locations.length,
+          itemBuilder: (context, index) {
+            var item = state.locations[index];
+            return ListTile(
+              title: Text(item.title),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => WeatherPage(item)));
+              },
+            );
+          }),
+    );
   }
 }
