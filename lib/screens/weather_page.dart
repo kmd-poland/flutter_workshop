@@ -81,4 +81,10 @@ class _WeatherPageState extends State<WeatherPage> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _compassBloc.dispose();
+  }
 }
