@@ -23,7 +23,7 @@ class CompassDataState extends CompassState {
 }
 
 
-class WeatherPageBloc extends Bloc<CompassEvent, CompassState> {
+class CompassBloc extends Bloc<CompassEvent, CompassState> {
   @override
   CompassState get initialState => NoCompassDataState();
 
