@@ -1,8 +1,10 @@
 
 import 'dart:math';
+import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 
 
 class Compass extends StatelessWidget {
@@ -49,13 +51,20 @@ class CompassPainter extends CustomPainter {
     canvas.drawCircle(Offset(0.0, 0.0), size.width, strokePaint);
 
 
+    var absAzimuth = userAzimuth;
+    if (absAzimuth < 0){
+      absAzimuth = 360+absAzimuth;
+    }
     canvas.drawLine(center, Offset.fromDirection((windAzimuth-90)*(pi/180.0), size.width - 10), windPaint);
-    canvas.drawLine(center, Offset.fromDirection((userAzimuth-90)*(pi/180.0), size.width - 10), userPaint);
+    canvas.drawLine(center, Offset.fromDirection((absAzimuth-90)*(pi/180.0), size.width - 10), userPaint);
    // canvas.drawLine(center, Offset(-size.width, size.height), strokePaint);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(CompassPainter oldDelegate) {
+    var windDiff = (windAzimuth - oldDelegate.windAzimuth).abs();
+    var userDiff = (userAzimuth - oldDelegate.userAzimuth).abs();
+    return (windDiff > 1 || userDiff > 1);
+
   }
 }
