@@ -36,7 +36,8 @@ class WeatherDetails {
   final double temperature;
   final double pressure;
   final double windSpeed;
-  final String windDirection;
+  final String windDirectionDescription;
+  final double windDirection;
   final double humidity;
   final String weatherState;
   final String weatherIconUrl;
@@ -45,6 +46,7 @@ class WeatherDetails {
       this.temperature,
       this.pressure,
       this.windSpeed,
+      this.windDirectionDescription,
       this.windDirection,
       this.humidity,
       this.weatherState,
@@ -57,6 +59,7 @@ class WeatherDetails {
         todaysWeather.airPressure,
         todaysWeather.windSpeed,
         todaysWeather.windDirectionCompass,
+        todaysWeather.windDirection,
         todaysWeather.humidity,
         todaysWeather.weatherStateName,
         "https://www.metaweather.com/static/img/weather/png/${todaysWeather.weatherStateAbbr}.png");

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterworkshops/blocs/weather_page_bloc.dart';
 import 'package:flutterworkshops/models/location.dart';
+import 'package:flutterworkshops/widgets/compass.dart';
 import 'package:flutterworkshops/widgets/weather_card.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -33,7 +34,10 @@ class _WeatherPageState extends State<WeatherPage> {
           bloc: _bloc,
           builder: (context, state) {
             if (state is WeatherDataLoadedState) {
-              return Positioned.fill(child: WeatherCard(state.weatherDetails));
+              return Stack(children: [
+                Positioned.fill(child: WeatherCard(state.weatherDetails)),
+                Positioned(width: 50, height: 50, right: 10, bottom: 200,  child: Compass(state.weatherDetails.windDirection,0) ,)
+              ]);
             } else if (state is WeatherDataErrorState) {
               return Positioned.fill(
                   child: Container(
