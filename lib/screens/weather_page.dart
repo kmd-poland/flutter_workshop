@@ -45,7 +45,12 @@ class _WeatherPageState extends State<WeatherPage> {
                   bloc: _compassBloc,
                   builder: (context, compassState){
                     if (compassState is CompassDataState){
-                      return  Positioned(width: 50, height: 50, right: 10, bottom: 200,  child: Compass(state.weatherDetails.windDirection, compassState.azimuth),);
+                      return  Positioned(width: 150, height: 150, right: 20, bottom: 180,  child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                              border: Border.all(width: 5, color: Colors.blue, style: BorderStyle.solid)
+                          ),
+                          child: Compass(state.weatherDetails.windDirection, compassState.azimuth)),);
                     } else {
                       return Container();
                     }
