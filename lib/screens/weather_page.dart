@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterworkshops/services/weather_service.dart';
-import 'package:flutterworkshops/widgets/wather_card.dart';
-import 'package:flutterworkshops/widgets/wather_icon.dart';
+import 'package:flutterworkshops/widgets/weather_card.dart';
+import 'package:flutterworkshops/widgets/weather_icon.dart';
 
 class WeatherPage extends StatefulWidget {
   static const String routeName = "/weather";
