@@ -28,7 +28,14 @@ class WeatherService {
   //TODO change it to use API and return WeatherPrediction
   WeatherDetails getWeather(String locationName) {
     Random rand = Random();
-    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)]);
+
+    List<WeatherDetails> nextDays = [
+    WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)], List<WeatherDetails>()),
+    WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)], List<WeatherDetails>()),
+    WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)], List<WeatherDetails>()),
+    ];
+
+    return WeatherDetails(rand.nextDouble() * 100, rand.nextDouble() * 100, rand.nextDouble() * 100, "NW", rand.nextDouble() * 100, WeatherType.values[rand.nextInt(WeatherType.values.length)], nextDays);
   }
 }
 
@@ -54,8 +61,10 @@ class WeatherDetails {
 
   final WeatherType type;
 
+  final List<WeatherDetails> nextThreeDays;
+
   WeatherDetails(this.temperature, this.pressure, this.windSpeed,
-      this.windDirection, this.humidity, this.type);
+      this.windDirection, this.humidity, this.type, this.nextThreeDays);
 }
 
 

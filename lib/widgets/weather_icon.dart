@@ -3,12 +3,15 @@ import 'package:flutterworkshops/services/weather_service.dart';
 
 class WeatherIcon extends StatelessWidget {
   final WeatherDetails details;
+  final bool isTodaysWeather;
 
-  WeatherIcon(this.details);
+  WeatherIcon(this.details, this.isTodaysWeather);
 
   @override
   Widget build(BuildContext context) {
-    return Text(_getUnicode(), style: Theme.of(context).textTheme.headline1,);
+    return Text(_getUnicode(), style: isTodaysWeather ?
+    Theme.of(context).textTheme.headline1 : Theme.of(context).textTheme.headline2
+    );
   }
 
   String _getUnicode() {
