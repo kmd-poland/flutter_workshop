@@ -41,6 +41,8 @@ class WeatherDetails {
   final double humidity;
   final String weatherState;
   final String weatherIconUrl;
+  final List<WeatherDetails> nextThreeDays;
+
 
   WeatherDetails(
       this.temperature,
@@ -50,10 +52,26 @@ class WeatherDetails {
       this.windDirection,
       this.humidity,
       this.weatherState,
-      this.weatherIconUrl);
+      this.weatherIconUrl,
+      this.nextThreeDays);
 
   factory WeatherDetails.fromPrediction(WeatherPrediction prediction) {
-    var todaysWeather = prediction.weatherPrediction.first;
+    var weatherForecast = prediction.weatherPrediction;
+
+    var nextDays = weatherForecast.sublist(1, 4).map((element) =>
+        WeatherDetails(
+            element.theTemp,
+            element.airPressure,
+            element.windSpeed,
+            element.windDirectionCompass,
+            element.windDirection,
+            element.humidity,
+            element.weatherStateName,
+            "https://www.metaweather.com/static/img/weather/png/${element.weatherStateAbbr}.png",
+            List<WeatherDetails>())).toList();
+
+    var todaysWeather = weatherForecast.first;
+
     return WeatherDetails(
         todaysWeather.theTemp,
         todaysWeather.airPressure,
@@ -62,6 +80,7 @@ class WeatherDetails {
         todaysWeather.windDirection,
         todaysWeather.humidity,
         todaysWeather.weatherStateName,
-        "https://www.metaweather.com/static/img/weather/png/${todaysWeather.weatherStateAbbr}.png");
+        "https://www.metaweather.com/static/img/weather/png/${todaysWeather.weatherStateAbbr}.png",
+        nextDays);
   }
 }
