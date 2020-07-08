@@ -20,6 +20,7 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
 
+        //todo: listen to flutter for start/stop compass events
         compass = CompassService(this.context) { data: Double -> gotCompassData(flutterEngine, data)}
 
     }
